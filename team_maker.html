@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <link rel="apple-touch-icon" sizes="180x180" href="favicon_io/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon_io/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon_io/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <title>Team maker</title>
+</head>
+<body>
+    <h1 class="text-center text-light bg-primary ">The Team maker</h1>
+    <main class="mt-4 mx-5">
+        
+        <!-- add player -->
+        <div class="input-group">
+            <input type="text" class="form-control" placeholder="Add Player" aria-label="Recipient's username with two button addons">
+            <input class="form-control" type="number" placeholder="player rating" min="1" max="10" >
+            <button class="btn btn-outline-secondary btn-outline-success w-25" type="button" onclick="add_player(this)">Add</button>
+        </div>
+        
+        <!-- playerlist -->
+        <ol id="parentList" class="list-group list-group-numbered my-5">
+            <!-- <li class="list-group-item d-flex justify-content-between align-items-start">
+              <div class="ms-2 me-auto">
+                first player
+                
+              </div>
+              <span class="badge bg-primary rounded-pill mx-3">rating</span>
+              <button class="btn btn-outline-secondary btn-outline-secondary mx-3" type="button" onclick="editElement(this)">Edit</button>
+              <button class="btn btn-outline-secondary btn-outline-danger mx-3" type="button" onclick="removeElement(this)">Remove</button>
+              
+            </li> -->
+            
+          </ol> 
+          <div class="d-grid m-auto w-50">
+            <button id="generate" class="btn btn-primary" type="button" onclick="generate(this)">Generate Teams</button>
+            <!-- <button class="btn btn-dark" type="button" onclick="regenerate(this)">Regenerate Teams</button> -->
+          </div>
+           
+          
+    </main>
+    <div class="row">
+      
+    <div  class=" col-md-6 ">
+      
+    <table id="table1" class="table table-bordered col my-5 mx-3">
+      <thead>
+        <tr id="trtag1">
+          <!-- <th scope="col">Sr</th>
+          <th scope="col">Name</th>
+          <th scope="col">rating</th> -->
+          
+        </tr>
+      </thead>
+      <tbody id="team1row">
+        <tr>
+          <!-- <th scope="row">1</th>
+          <td>Mark</td>
+          <td>Otto</td> -->
+          
+        </tr>
+        
+      </tbody>
+    </table>
+  </div>
+
+  
+    <div class=" col-md-6 ">
+    <!-- table2 -->
+    <table id="table2" class="table table-bordered my-5 mx-3">
+      
+      <thead>
+        
+        <tr id="trtag2">
+          <!-- <th scope="col">Sr</th>
+          <th scope="col">Name</th>
+          <th scope="col">rating</th> -->
+          
+        </tr>
+      </thead>
+      <tbody id="team2row">
+        <tr>
+          <!-- <th scope="row">1</th>
+          <td>Mark</td> -->
+          
+          
+        </tr>
+        
+      </tbody>
+    </table>
+  </div>
+</div>
+    <script>
+      
+      
+      
+      function add_player(e,data){
+
+        
+        let currAdd=e
+        let player_rating_input=currAdd.previousElementSibling.value
+        let player_name_input=currAdd.previousElementSibling.previousElementSibling.value
+
+        if(  player_name_input==""){
+          alert("you need to enter player name")
+          return 
+        }
+        if(player_rating_input ==""){
+          alert("you need to enter player rating")
+          return
+        }
+        if(player_rating_input>10 || player_rating_input<0){
+          alert(`Invalid Rating. enter between 1 to 10`)
+          return
+        }
+        
+
+        let parentList=document.getElementById('parentList')
+        // creating new list element
+        let newLi=document.createElement('li')
+        newLi.className="list-group-item d-flex justify-content-between align-items-start"
+        newLi.innerHTML=
+              `<div class="ms-2 me-auto">
+                ${player_name_input}
+              </div>
+              <span class="badge bg-primary rounded-pill mx-3">${player_rating_input}</span>
+              
+              <button class="btn btn-outline-secondary btn-outline-danger mx-3" type="button" onclick="removeElement(this)">Remove</button>`
+            
+        parentList.appendChild(newLi)
+        // setting null value
+        
+        
+        currAdd.previousElementSibling.value="";
+        player_name_input=currAdd.previousElementSibling.previousElementSibling.value="";
+        
+      }
+      
+      // remove player function
+      function removeElement(e){
+        e.parentElement.remove()
+      }
+
+      
+      // edit function
+      function editElement(e){
+        
+      }
+      function generate(e){
+        // document.getElementById("generate").remove()
+        // let btnRegenerate=document.createElement('button')
+        // btnRegenerate.className("btn btn-dark")
+        // btnRegenerate.type("button")
+        // btnRegenerate.onclick("regenerate(this)")
+        // btnRegenerate.textContent("Regenerate Teams")
+        
+
+        //  let parentdiv=document.createElement('div')
+        //  let div1=document.createElement('div')
+        //  let div2=document.createElement('div')
+
+        //  parentdiv.className=
+
+        //  parentdiv.appendChild(div1)
+        //  parentdiv.appendChild(div2)
+        //  div1.className=
+        //  div2.className=
+        // creating dict
+        data={}
+      
+        let values=document.getElementsByClassName("badge bg-primary rounded-pill mx-3")
+        let key=document.getElementsByClassName("ms-2 me-auto")
+        let l=key.length
+        
+       
+        for(let i=0;i<l;i++){
+          
+          data[key[i].textContent]=Number(values[i].textContent)
+        }
+        // Create items array
+        var items = Object.keys(data).map(function(key) {
+          return [key, data[key]];
+        });
+
+        // Sort the array based on the second element
+        items.sort(function(first, second) {
+          return second[1] - first[1];
+        });
+        
+
+        let sum1=0
+        let sum2=0
+        team1={}
+        team2={}
+        
+        if(Object.keys(data).length !=key.length ){
+          alert("some player(s) is repeted please correct it")
+          return
+        }
+        
+        for(let i in items){
+          
+          if(sum2>=sum1){
+            
+            team1[items[i][0]]=items[i][1]
+            sum1=sum1+items[i][1]
+            
+            
+            
+
+          }
+          else{
+            team2[items[i][0]]=items[i][1]
+            sum2=sum2+items[i][1]
+            
+          }
+        
+        
+        }
+        
+        let table11=document.getElementById("table1")
+        let i=1
+        let trtag1=document.getElementById("trtag1")
+        trtag1.innerHTML=`<th scope="col">Sr</th>
+          <th scope="col">Name</th>
+          <th scope="col">rating</th>`
+        for (let itr in team1){
+          
+          let newrow=document.createElement('tr')
+          newrow.innerHTML=`<th scope="row">${i}</th>
+          <td>${itr}</td>
+          <td>${team1[itr]}</td>`
+          delete team1[itr]
+          let tbody=document.getElementById("team1row")
+          tbody.appendChild(newrow)
+          i=i+1
+        
+        
+
+        }
+        let table22=document.getElementById("table2")
+        let j=1
+        let trtag2=document.getElementById("trtag2")
+        trtag2.innerHTML=`<th scope="col">Sr</th>
+          <th scope="col">Name</th>
+          <th scope="col">rating</th>`
+        for (let itr in team2){
+          
+          console.log(itr)
+          let newrow=document.createElement('tr')
+          newrow.innerHTML=`<th scope="row">${j}</th>
+          <td>${itr}</td>
+          <td>${team2[itr]}</td>`
+          
+          let tbody=document.getElementById("team2row")
+          tbody.appendChild(newrow)
+          j=j+1
+        
+        
+
+        }
+        }
+      
+      
+       
+    </script>
+</body>
+</html>
